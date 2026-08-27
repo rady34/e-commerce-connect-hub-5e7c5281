@@ -10,33 +10,557 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as InitialSetupRouteImport } from './routes/initial-setup'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminActivityLogRouteImport } from './routes/admin.activity-log'
+import { Route as AdminAuditLogRouteImport } from './routes/admin.audit-log'
+import { Route as AdminComplaintsRouteImport } from './routes/admin.complaints'
+import { Route as AdminDataSourcesRouteImport } from './routes/admin.data-sources'
+import { Route as AdminDistributionRulesRouteImport } from './routes/admin.distribution-rules'
+import { Route as AdminEmployeesRouteImport } from './routes/admin.employees'
+import { Route as AdminIncentivesRouteImport } from './routes/admin.incentives'
+import { Route as AdminNotificationsRouteImport } from './routes/admin.notifications'
+import { Route as AdminPermissionsRouteImport } from './routes/admin.permissions'
+import { Route as AdminRolesRouteImport } from './routes/admin.roles'
+import { Route as AdminScoringRouteImport } from './routes/admin.scoring'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminWalletsRouteImport } from './routes/admin.wallets'
+import { Route as CallCenterIndexRouteImport } from './routes/call-center.index'
+import { Route as CallCenterComplaintsRouteImport } from './routes/call-center.complaints'
+import { Route as CallCenterNotificationsRouteImport } from './routes/call-center.notifications'
+import { Route as CallCenterOrdersRouteImport } from './routes/call-center.orders'
+import { Route as CallCenterSettingsRouteImport } from './routes/call-center.settings'
+import { Route as CallCenterWalletRouteImport } from './routes/call-center.wallet'
+import { Route as SellerIndexRouteImport } from './routes/seller.index'
+import { Route as SellerComplaintsRouteImport } from './routes/seller.complaints'
+import { Route as SellerNotificationsRouteImport } from './routes/seller.notifications'
+import { Route as SellerOrdersRouteImport } from './routes/seller.orders'
+import { Route as SellerProductsRouteImport } from './routes/seller.products'
+import { Route as SellerSettingsRouteImport } from './routes/seller.settings'
+import { Route as SellerWalletRouteImport } from './routes/seller.wallet'
+import { Route as SignupCallCenterRouteImport } from './routes/signup.call-center'
+import { Route as SignupSellerRouteImport } from './routes/signup.seller'
+import { Route as AdminCallCentersIndexRouteImport } from './routes/admin.call-centers.index'
+import { Route as AdminCallCentersIdRouteImport } from './routes/admin.call-centers.$id'
+import { Route as AdminOrdersIndexRouteImport } from './routes/admin.orders.index'
+import { Route as AdminOrdersIdRouteImport } from './routes/admin.orders.$id'
+import { Route as AdminSellersIndexRouteImport } from './routes/admin.sellers.index'
+import { Route as AdminSellersIdRouteImport } from './routes/admin.sellers.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InitialSetupRoute = InitialSetupRouteImport.update({
+  id: '/initial-setup',
+  path: '/initial-setup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminActivityLogRoute = AdminActivityLogRouteImport.update({
+  id: '/admin/activity-log',
+  path: '/admin/activity-log',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAuditLogRoute = AdminAuditLogRouteImport.update({
+  id: '/admin/audit-log',
+  path: '/admin/audit-log',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminComplaintsRoute = AdminComplaintsRouteImport.update({
+  id: '/admin/complaints',
+  path: '/admin/complaints',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDataSourcesRoute = AdminDataSourcesRouteImport.update({
+  id: '/admin/data-sources',
+  path: '/admin/data-sources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDistributionRulesRoute = AdminDistributionRulesRouteImport.update({
+  id: '/admin/distribution-rules',
+  path: '/admin/distribution-rules',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminEmployeesRoute = AdminEmployeesRouteImport.update({
+  id: '/admin/employees',
+  path: '/admin/employees',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIncentivesRoute = AdminIncentivesRouteImport.update({
+  id: '/admin/incentives',
+  path: '/admin/incentives',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminNotificationsRoute = AdminNotificationsRouteImport.update({
+  id: '/admin/notifications',
+  path: '/admin/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminPermissionsRoute = AdminPermissionsRouteImport.update({
+  id: '/admin/permissions',
+  path: '/admin/permissions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRolesRoute = AdminRolesRouteImport.update({
+  id: '/admin/roles',
+  path: '/admin/roles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminScoringRoute = AdminScoringRouteImport.update({
+  id: '/admin/scoring',
+  path: '/admin/scoring',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/admin/settings',
+  path: '/admin/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/admin/users',
+  path: '/admin/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminWalletsRoute = AdminWalletsRouteImport.update({
+  id: '/admin/wallets',
+  path: '/admin/wallets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CallCenterIndexRoute = CallCenterIndexRouteImport.update({
+  id: '/call-center/',
+  path: '/call-center/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CallCenterComplaintsRoute = CallCenterComplaintsRouteImport.update({
+  id: '/call-center/complaints',
+  path: '/call-center/complaints',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CallCenterNotificationsRoute = CallCenterNotificationsRouteImport.update({
+  id: '/call-center/notifications',
+  path: '/call-center/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CallCenterOrdersRoute = CallCenterOrdersRouteImport.update({
+  id: '/call-center/orders',
+  path: '/call-center/orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CallCenterSettingsRoute = CallCenterSettingsRouteImport.update({
+  id: '/call-center/settings',
+  path: '/call-center/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CallCenterWalletRoute = CallCenterWalletRouteImport.update({
+  id: '/call-center/wallet',
+  path: '/call-center/wallet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellerIndexRoute = SellerIndexRouteImport.update({
+  id: '/seller/',
+  path: '/seller/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellerComplaintsRoute = SellerComplaintsRouteImport.update({
+  id: '/seller/complaints',
+  path: '/seller/complaints',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellerNotificationsRoute = SellerNotificationsRouteImport.update({
+  id: '/seller/notifications',
+  path: '/seller/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellerOrdersRoute = SellerOrdersRouteImport.update({
+  id: '/seller/orders',
+  path: '/seller/orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellerProductsRoute = SellerProductsRouteImport.update({
+  id: '/seller/products',
+  path: '/seller/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellerSettingsRoute = SellerSettingsRouteImport.update({
+  id: '/seller/settings',
+  path: '/seller/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellerWalletRoute = SellerWalletRouteImport.update({
+  id: '/seller/wallet',
+  path: '/seller/wallet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupCallCenterRoute = SignupCallCenterRouteImport.update({
+  id: '/signup/call-center',
+  path: '/signup/call-center',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupSellerRoute = SignupSellerRouteImport.update({
+  id: '/signup/seller',
+  path: '/signup/seller',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCallCentersIndexRoute = AdminCallCentersIndexRouteImport.update({
+  id: '/admin/call-centers/',
+  path: '/admin/call-centers/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCallCentersIdRoute = AdminCallCentersIdRouteImport.update({
+  id: '/admin/call-centers/$id',
+  path: '/admin/call-centers/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminOrdersIndexRoute = AdminOrdersIndexRouteImport.update({
+  id: '/admin/orders/',
+  path: '/admin/orders/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminOrdersIdRoute = AdminOrdersIdRouteImport.update({
+  id: '/admin/orders/$id',
+  path: '/admin/orders/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSellersIndexRoute = AdminSellersIndexRouteImport.update({
+  id: '/admin/sellers/',
+  path: '/admin/sellers/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSellersIdRoute = AdminSellersIdRouteImport.update({
+  id: '/admin/sellers/$id',
+  path: '/admin/sellers/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/initial-setup': typeof InitialSetupRoute
+  '/login': typeof LoginRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/admin/activity-log': typeof AdminActivityLogRoute
+  '/admin/audit-log': typeof AdminAuditLogRoute
+  '/admin/complaints': typeof AdminComplaintsRoute
+  '/admin/data-sources': typeof AdminDataSourcesRoute
+  '/admin/distribution-rules': typeof AdminDistributionRulesRoute
+  '/admin/employees': typeof AdminEmployeesRoute
+  '/admin/incentives': typeof AdminIncentivesRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/permissions': typeof AdminPermissionsRoute
+  '/admin/roles': typeof AdminRolesRoute
+  '/admin/scoring': typeof AdminScoringRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/wallets': typeof AdminWalletsRoute
+  '/call-center/complaints': typeof CallCenterComplaintsRoute
+  '/call-center/notifications': typeof CallCenterNotificationsRoute
+  '/call-center/orders': typeof CallCenterOrdersRoute
+  '/call-center/settings': typeof CallCenterSettingsRoute
+  '/call-center/wallet': typeof CallCenterWalletRoute
+  '/seller/complaints': typeof SellerComplaintsRoute
+  '/seller/notifications': typeof SellerNotificationsRoute
+  '/seller/orders': typeof SellerOrdersRoute
+  '/seller/products': typeof SellerProductsRoute
+  '/seller/settings': typeof SellerSettingsRoute
+  '/seller/wallet': typeof SellerWalletRoute
+  '/signup/call-center': typeof SignupCallCenterRoute
+  '/signup/seller': typeof SignupSellerRoute
+  '/admin/': typeof AdminIndexRoute
+  '/call-center/': typeof CallCenterIndexRoute
+  '/seller/': typeof SellerIndexRoute
+  '/admin/call-centers/$id': typeof AdminCallCentersIdRoute
+  '/admin/orders/$id': typeof AdminOrdersIdRoute
+  '/admin/sellers/$id': typeof AdminSellersIdRoute
+  '/admin/call-centers/': typeof AdminCallCentersIndexRoute
+  '/admin/orders/': typeof AdminOrdersIndexRoute
+  '/admin/sellers/': typeof AdminSellersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/initial-setup': typeof InitialSetupRoute
+  '/login': typeof LoginRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/admin/activity-log': typeof AdminActivityLogRoute
+  '/admin/audit-log': typeof AdminAuditLogRoute
+  '/admin/complaints': typeof AdminComplaintsRoute
+  '/admin/data-sources': typeof AdminDataSourcesRoute
+  '/admin/distribution-rules': typeof AdminDistributionRulesRoute
+  '/admin/employees': typeof AdminEmployeesRoute
+  '/admin/incentives': typeof AdminIncentivesRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/permissions': typeof AdminPermissionsRoute
+  '/admin/roles': typeof AdminRolesRoute
+  '/admin/scoring': typeof AdminScoringRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/wallets': typeof AdminWalletsRoute
+  '/call-center/complaints': typeof CallCenterComplaintsRoute
+  '/call-center/notifications': typeof CallCenterNotificationsRoute
+  '/call-center/orders': typeof CallCenterOrdersRoute
+  '/call-center/settings': typeof CallCenterSettingsRoute
+  '/call-center/wallet': typeof CallCenterWalletRoute
+  '/seller/complaints': typeof SellerComplaintsRoute
+  '/seller/notifications': typeof SellerNotificationsRoute
+  '/seller/orders': typeof SellerOrdersRoute
+  '/seller/products': typeof SellerProductsRoute
+  '/seller/settings': typeof SellerSettingsRoute
+  '/seller/wallet': typeof SellerWalletRoute
+  '/signup/call-center': typeof SignupCallCenterRoute
+  '/signup/seller': typeof SignupSellerRoute
+  '/admin': typeof AdminIndexRoute
+  '/call-center': typeof CallCenterIndexRoute
+  '/seller': typeof SellerIndexRoute
+  '/admin/call-centers/$id': typeof AdminCallCentersIdRoute
+  '/admin/orders/$id': typeof AdminOrdersIdRoute
+  '/admin/sellers/$id': typeof AdminSellersIdRoute
+  '/admin/call-centers': typeof AdminCallCentersIndexRoute
+  '/admin/orders': typeof AdminOrdersIndexRoute
+  '/admin/sellers': typeof AdminSellersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/initial-setup': typeof InitialSetupRoute
+  '/login': typeof LoginRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/admin/activity-log': typeof AdminActivityLogRoute
+  '/admin/audit-log': typeof AdminAuditLogRoute
+  '/admin/complaints': typeof AdminComplaintsRoute
+  '/admin/data-sources': typeof AdminDataSourcesRoute
+  '/admin/distribution-rules': typeof AdminDistributionRulesRoute
+  '/admin/employees': typeof AdminEmployeesRoute
+  '/admin/incentives': typeof AdminIncentivesRoute
+  '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/permissions': typeof AdminPermissionsRoute
+  '/admin/roles': typeof AdminRolesRoute
+  '/admin/scoring': typeof AdminScoringRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/wallets': typeof AdminWalletsRoute
+  '/call-center/complaints': typeof CallCenterComplaintsRoute
+  '/call-center/notifications': typeof CallCenterNotificationsRoute
+  '/call-center/orders': typeof CallCenterOrdersRoute
+  '/call-center/settings': typeof CallCenterSettingsRoute
+  '/call-center/wallet': typeof CallCenterWalletRoute
+  '/seller/complaints': typeof SellerComplaintsRoute
+  '/seller/notifications': typeof SellerNotificationsRoute
+  '/seller/orders': typeof SellerOrdersRoute
+  '/seller/products': typeof SellerProductsRoute
+  '/seller/settings': typeof SellerSettingsRoute
+  '/seller/wallet': typeof SellerWalletRoute
+  '/signup/call-center': typeof SignupCallCenterRoute
+  '/signup/seller': typeof SignupSellerRoute
+  '/admin/': typeof AdminIndexRoute
+  '/call-center/': typeof CallCenterIndexRoute
+  '/seller/': typeof SellerIndexRoute
+  '/admin/call-centers/$id': typeof AdminCallCentersIdRoute
+  '/admin/orders/$id': typeof AdminOrdersIdRoute
+  '/admin/sellers/$id': typeof AdminSellersIdRoute
+  '/admin/call-centers/': typeof AdminCallCentersIndexRoute
+  '/admin/orders/': typeof AdminOrdersIndexRoute
+  '/admin/sellers/': typeof AdminSellersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/forgot-password'
+    | '/initial-setup'
+    | '/login'
+    | '/reset-password'
+    | '/admin/activity-log'
+    | '/admin/audit-log'
+    | '/admin/complaints'
+    | '/admin/data-sources'
+    | '/admin/distribution-rules'
+    | '/admin/employees'
+    | '/admin/incentives'
+    | '/admin/notifications'
+    | '/admin/permissions'
+    | '/admin/roles'
+    | '/admin/scoring'
+    | '/admin/settings'
+    | '/admin/users'
+    | '/admin/wallets'
+    | '/call-center/complaints'
+    | '/call-center/notifications'
+    | '/call-center/orders'
+    | '/call-center/settings'
+    | '/call-center/wallet'
+    | '/seller/complaints'
+    | '/seller/notifications'
+    | '/seller/orders'
+    | '/seller/products'
+    | '/seller/settings'
+    | '/seller/wallet'
+    | '/signup/call-center'
+    | '/signup/seller'
+    | '/admin/'
+    | '/call-center/'
+    | '/seller/'
+    | '/admin/call-centers/$id'
+    | '/admin/orders/$id'
+    | '/admin/sellers/$id'
+    | '/admin/call-centers/'
+    | '/admin/orders/'
+    | '/admin/sellers/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/forgot-password'
+    | '/initial-setup'
+    | '/login'
+    | '/reset-password'
+    | '/admin/activity-log'
+    | '/admin/audit-log'
+    | '/admin/complaints'
+    | '/admin/data-sources'
+    | '/admin/distribution-rules'
+    | '/admin/employees'
+    | '/admin/incentives'
+    | '/admin/notifications'
+    | '/admin/permissions'
+    | '/admin/roles'
+    | '/admin/scoring'
+    | '/admin/settings'
+    | '/admin/users'
+    | '/admin/wallets'
+    | '/call-center/complaints'
+    | '/call-center/notifications'
+    | '/call-center/orders'
+    | '/call-center/settings'
+    | '/call-center/wallet'
+    | '/seller/complaints'
+    | '/seller/notifications'
+    | '/seller/orders'
+    | '/seller/products'
+    | '/seller/settings'
+    | '/seller/wallet'
+    | '/signup/call-center'
+    | '/signup/seller'
+    | '/admin'
+    | '/call-center'
+    | '/seller'
+    | '/admin/call-centers/$id'
+    | '/admin/orders/$id'
+    | '/admin/sellers/$id'
+    | '/admin/call-centers'
+    | '/admin/orders'
+    | '/admin/sellers'
+  id:
+    | '__root__'
+    | '/'
+    | '/forgot-password'
+    | '/initial-setup'
+    | '/login'
+    | '/reset-password'
+    | '/admin/activity-log'
+    | '/admin/audit-log'
+    | '/admin/complaints'
+    | '/admin/data-sources'
+    | '/admin/distribution-rules'
+    | '/admin/employees'
+    | '/admin/incentives'
+    | '/admin/notifications'
+    | '/admin/permissions'
+    | '/admin/roles'
+    | '/admin/scoring'
+    | '/admin/settings'
+    | '/admin/users'
+    | '/admin/wallets'
+    | '/call-center/complaints'
+    | '/call-center/notifications'
+    | '/call-center/orders'
+    | '/call-center/settings'
+    | '/call-center/wallet'
+    | '/seller/complaints'
+    | '/seller/notifications'
+    | '/seller/orders'
+    | '/seller/products'
+    | '/seller/settings'
+    | '/seller/wallet'
+    | '/signup/call-center'
+    | '/signup/seller'
+    | '/admin/'
+    | '/call-center/'
+    | '/seller/'
+    | '/admin/call-centers/$id'
+    | '/admin/orders/$id'
+    | '/admin/sellers/$id'
+    | '/admin/call-centers/'
+    | '/admin/orders/'
+    | '/admin/sellers/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
+  InitialSetupRoute: typeof InitialSetupRoute
+  LoginRoute: typeof LoginRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  AdminActivityLogRoute: typeof AdminActivityLogRoute
+  AdminAuditLogRoute: typeof AdminAuditLogRoute
+  AdminComplaintsRoute: typeof AdminComplaintsRoute
+  AdminDataSourcesRoute: typeof AdminDataSourcesRoute
+  AdminDistributionRulesRoute: typeof AdminDistributionRulesRoute
+  AdminEmployeesRoute: typeof AdminEmployeesRoute
+  AdminIncentivesRoute: typeof AdminIncentivesRoute
+  AdminNotificationsRoute: typeof AdminNotificationsRoute
+  AdminPermissionsRoute: typeof AdminPermissionsRoute
+  AdminRolesRoute: typeof AdminRolesRoute
+  AdminScoringRoute: typeof AdminScoringRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminWalletsRoute: typeof AdminWalletsRoute
+  CallCenterComplaintsRoute: typeof CallCenterComplaintsRoute
+  CallCenterNotificationsRoute: typeof CallCenterNotificationsRoute
+  CallCenterOrdersRoute: typeof CallCenterOrdersRoute
+  CallCenterSettingsRoute: typeof CallCenterSettingsRoute
+  CallCenterWalletRoute: typeof CallCenterWalletRoute
+  SellerComplaintsRoute: typeof SellerComplaintsRoute
+  SellerNotificationsRoute: typeof SellerNotificationsRoute
+  SellerOrdersRoute: typeof SellerOrdersRoute
+  SellerProductsRoute: typeof SellerProductsRoute
+  SellerSettingsRoute: typeof SellerSettingsRoute
+  SellerWalletRoute: typeof SellerWalletRoute
+  SignupCallCenterRoute: typeof SignupCallCenterRoute
+  SignupSellerRoute: typeof SignupSellerRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  CallCenterIndexRoute: typeof CallCenterIndexRoute
+  SellerIndexRoute: typeof SellerIndexRoute
+  AdminCallCentersIdRoute: typeof AdminCallCentersIdRoute
+  AdminOrdersIdRoute: typeof AdminOrdersIdRoute
+  AdminSellersIdRoute: typeof AdminSellersIdRoute
+  AdminCallCentersIndexRoute: typeof AdminCallCentersIndexRoute
+  AdminOrdersIndexRoute: typeof AdminOrdersIndexRoute
+  AdminSellersIndexRoute: typeof AdminSellersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +572,331 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/initial-setup': {
+      id: '/initial-setup'
+      path: '/initial-setup'
+      fullPath: '/initial-setup'
+      preLoaderRoute: typeof InitialSetupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/activity-log': {
+      id: '/admin/activity-log'
+      path: '/admin/activity-log'
+      fullPath: '/admin/activity-log'
+      preLoaderRoute: typeof AdminActivityLogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/audit-log': {
+      id: '/admin/audit-log'
+      path: '/admin/audit-log'
+      fullPath: '/admin/audit-log'
+      preLoaderRoute: typeof AdminAuditLogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/complaints': {
+      id: '/admin/complaints'
+      path: '/admin/complaints'
+      fullPath: '/admin/complaints'
+      preLoaderRoute: typeof AdminComplaintsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/data-sources': {
+      id: '/admin/data-sources'
+      path: '/admin/data-sources'
+      fullPath: '/admin/data-sources'
+      preLoaderRoute: typeof AdminDataSourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/distribution-rules': {
+      id: '/admin/distribution-rules'
+      path: '/admin/distribution-rules'
+      fullPath: '/admin/distribution-rules'
+      preLoaderRoute: typeof AdminDistributionRulesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/employees': {
+      id: '/admin/employees'
+      path: '/admin/employees'
+      fullPath: '/admin/employees'
+      preLoaderRoute: typeof AdminEmployeesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/incentives': {
+      id: '/admin/incentives'
+      path: '/admin/incentives'
+      fullPath: '/admin/incentives'
+      preLoaderRoute: typeof AdminIncentivesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/notifications': {
+      id: '/admin/notifications'
+      path: '/admin/notifications'
+      fullPath: '/admin/notifications'
+      preLoaderRoute: typeof AdminNotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/permissions': {
+      id: '/admin/permissions'
+      path: '/admin/permissions'
+      fullPath: '/admin/permissions'
+      preLoaderRoute: typeof AdminPermissionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/roles': {
+      id: '/admin/roles'
+      path: '/admin/roles'
+      fullPath: '/admin/roles'
+      preLoaderRoute: typeof AdminRolesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/scoring': {
+      id: '/admin/scoring'
+      path: '/admin/scoring'
+      fullPath: '/admin/scoring'
+      preLoaderRoute: typeof AdminScoringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/admin/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/admin/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/wallets': {
+      id: '/admin/wallets'
+      path: '/admin/wallets'
+      fullPath: '/admin/wallets'
+      preLoaderRoute: typeof AdminWalletsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/call-center/': {
+      id: '/call-center/'
+      path: '/call-center'
+      fullPath: '/call-center/'
+      preLoaderRoute: typeof CallCenterIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/call-center/complaints': {
+      id: '/call-center/complaints'
+      path: '/call-center/complaints'
+      fullPath: '/call-center/complaints'
+      preLoaderRoute: typeof CallCenterComplaintsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/call-center/notifications': {
+      id: '/call-center/notifications'
+      path: '/call-center/notifications'
+      fullPath: '/call-center/notifications'
+      preLoaderRoute: typeof CallCenterNotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/call-center/orders': {
+      id: '/call-center/orders'
+      path: '/call-center/orders'
+      fullPath: '/call-center/orders'
+      preLoaderRoute: typeof CallCenterOrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/call-center/settings': {
+      id: '/call-center/settings'
+      path: '/call-center/settings'
+      fullPath: '/call-center/settings'
+      preLoaderRoute: typeof CallCenterSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/call-center/wallet': {
+      id: '/call-center/wallet'
+      path: '/call-center/wallet'
+      fullPath: '/call-center/wallet'
+      preLoaderRoute: typeof CallCenterWalletRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seller/': {
+      id: '/seller/'
+      path: '/seller'
+      fullPath: '/seller/'
+      preLoaderRoute: typeof SellerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seller/complaints': {
+      id: '/seller/complaints'
+      path: '/seller/complaints'
+      fullPath: '/seller/complaints'
+      preLoaderRoute: typeof SellerComplaintsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seller/notifications': {
+      id: '/seller/notifications'
+      path: '/seller/notifications'
+      fullPath: '/seller/notifications'
+      preLoaderRoute: typeof SellerNotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seller/orders': {
+      id: '/seller/orders'
+      path: '/seller/orders'
+      fullPath: '/seller/orders'
+      preLoaderRoute: typeof SellerOrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seller/products': {
+      id: '/seller/products'
+      path: '/seller/products'
+      fullPath: '/seller/products'
+      preLoaderRoute: typeof SellerProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seller/settings': {
+      id: '/seller/settings'
+      path: '/seller/settings'
+      fullPath: '/seller/settings'
+      preLoaderRoute: typeof SellerSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seller/wallet': {
+      id: '/seller/wallet'
+      path: '/seller/wallet'
+      fullPath: '/seller/wallet'
+      preLoaderRoute: typeof SellerWalletRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup/call-center': {
+      id: '/signup/call-center'
+      path: '/signup/call-center'
+      fullPath: '/signup/call-center'
+      preLoaderRoute: typeof SignupCallCenterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup/seller': {
+      id: '/signup/seller'
+      path: '/signup/seller'
+      fullPath: '/signup/seller'
+      preLoaderRoute: typeof SignupSellerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/call-centers/': {
+      id: '/admin/call-centers/'
+      path: '/admin/call-centers'
+      fullPath: '/admin/call-centers/'
+      preLoaderRoute: typeof AdminCallCentersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/call-centers/$id': {
+      id: '/admin/call-centers/$id'
+      path: '/admin/call-centers/$id'
+      fullPath: '/admin/call-centers/$id'
+      preLoaderRoute: typeof AdminCallCentersIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/orders/': {
+      id: '/admin/orders/'
+      path: '/admin/orders'
+      fullPath: '/admin/orders/'
+      preLoaderRoute: typeof AdminOrdersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/orders/$id': {
+      id: '/admin/orders/$id'
+      path: '/admin/orders/$id'
+      fullPath: '/admin/orders/$id'
+      preLoaderRoute: typeof AdminOrdersIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/sellers/': {
+      id: '/admin/sellers/'
+      path: '/admin/sellers'
+      fullPath: '/admin/sellers/'
+      preLoaderRoute: typeof AdminSellersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/sellers/$id': {
+      id: '/admin/sellers/$id'
+      path: '/admin/sellers/$id'
+      fullPath: '/admin/sellers/$id'
+      preLoaderRoute: typeof AdminSellersIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
+  InitialSetupRoute: InitialSetupRoute,
+  LoginRoute: LoginRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  AdminActivityLogRoute: AdminActivityLogRoute,
+  AdminAuditLogRoute: AdminAuditLogRoute,
+  AdminComplaintsRoute: AdminComplaintsRoute,
+  AdminDataSourcesRoute: AdminDataSourcesRoute,
+  AdminDistributionRulesRoute: AdminDistributionRulesRoute,
+  AdminEmployeesRoute: AdminEmployeesRoute,
+  AdminIncentivesRoute: AdminIncentivesRoute,
+  AdminNotificationsRoute: AdminNotificationsRoute,
+  AdminPermissionsRoute: AdminPermissionsRoute,
+  AdminRolesRoute: AdminRolesRoute,
+  AdminScoringRoute: AdminScoringRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminWalletsRoute: AdminWalletsRoute,
+  CallCenterComplaintsRoute: CallCenterComplaintsRoute,
+  CallCenterNotificationsRoute: CallCenterNotificationsRoute,
+  CallCenterOrdersRoute: CallCenterOrdersRoute,
+  CallCenterSettingsRoute: CallCenterSettingsRoute,
+  CallCenterWalletRoute: CallCenterWalletRoute,
+  SellerComplaintsRoute: SellerComplaintsRoute,
+  SellerNotificationsRoute: SellerNotificationsRoute,
+  SellerOrdersRoute: SellerOrdersRoute,
+  SellerProductsRoute: SellerProductsRoute,
+  SellerSettingsRoute: SellerSettingsRoute,
+  SellerWalletRoute: SellerWalletRoute,
+  SignupCallCenterRoute: SignupCallCenterRoute,
+  SignupSellerRoute: SignupSellerRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  CallCenterIndexRoute: CallCenterIndexRoute,
+  SellerIndexRoute: SellerIndexRoute,
+  AdminCallCentersIdRoute: AdminCallCentersIdRoute,
+  AdminOrdersIdRoute: AdminOrdersIdRoute,
+  AdminSellersIdRoute: AdminSellersIdRoute,
+  AdminCallCentersIndexRoute: AdminCallCentersIndexRoute,
+  AdminOrdersIndexRoute: AdminOrdersIndexRoute,
+  AdminSellersIndexRoute: AdminSellersIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
