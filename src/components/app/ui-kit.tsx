@@ -870,7 +870,7 @@ export function DataTable<T>({
 
 
     const cardList = (
-      <ul className="grid items-stretch gap-3 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+      <ul className="grid items-stretch gap-5 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {slice.map((row, i) => {
           const idx = (current - 1) * pageSize + i;
           const id = rowId(row, idx);
@@ -882,7 +882,7 @@ export function DataTable<T>({
               key={id}
               onClick={() => onRowClick?.(row)}
               className={cn(
-                "group flex h-full flex-col gap-2 rounded-xl border border-border/80 bg-card p-3 shadow-[0_3px_0_0_var(--sidebar-border),0_4px_10px_-3px_oklch(0.25_0.02_200/0.08)] transition-all duration-200",
+                "group flex h-full flex-col gap-1.5 rounded-xl border border-border/80 bg-card p-2.5 shadow-[0_3px_0_0_var(--sidebar-border),0_4px_10px_-3px_oklch(0.25_0.02_200/0.08)] transition-all duration-200",
                 onRowClick && "cursor-pointer hover:-translate-y-1 hover:border-primary/40 hover:bg-muted/20 hover:shadow-[0_5px_0_0_var(--sidebar-border),0_12px_20px_-5px_oklch(0.25_0.02_200/0.14)]",
               )}
             >
@@ -892,15 +892,15 @@ export function DataTable<T>({
                     <Checkbox checked={selected.has(id)} onCheckedChange={() => toggleRow(id)} aria-label="تحديد عنصر" />
                   </span>
                 ) : null}
-                <p className="min-w-0 flex-1 truncate text-[13px] font-semibold leading-snug">
+                <p className="min-w-0 flex-1 truncate text-xs font-semibold leading-snug">
                   {head ? (head.render ? head.render(row) : String((row as Record<string, unknown>)[head.key] ?? "—")) : null}
                 </p>
               </div>
-              <dl className="grid grid-cols-2 gap-x-2.5 gap-y-2 border-t border-border/60 pt-2.5">
+              <dl className="grid grid-cols-2 gap-x-2 gap-y-1.5 border-t border-border/60 pt-2">
                 {rest.map((c) => (
                   <div key={c.key} className="min-w-0">
                     <dt className="truncate text-[10px] text-muted-foreground">{c.header}</dt>
-                    <dd className="truncate text-xs font-medium">
+                    <dd className="truncate text-[11px] font-medium">
                       {c.render ? c.render(row) : String((row as Record<string, unknown>)[c.key] ?? "—")}
                     </dd>
                   </div>
@@ -908,7 +908,7 @@ export function DataTable<T>({
               </dl>
               {actions ? (
                 <div
-                  className="mt-auto flex flex-wrap items-center justify-end gap-1.5 border-t border-border/60 pt-2.5"
+                  className="mt-auto flex flex-wrap items-center justify-end gap-1.5 border-t border-border/60 pt-2"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {actions.render ? actions.render(row) : null}
