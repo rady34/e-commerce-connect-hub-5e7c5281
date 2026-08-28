@@ -998,44 +998,15 @@ export function DataTable<T>({
             }}
             placeholder={searchPlaceholder}
           />
-          {fields.length || filters.length ? (
+          {fields.length ? (
             <AdvancedFilters
               fields={fields}
               rules={rules}
               activeCount={activeFilterCount}
-              onClearQuick={() => setLegacy({})}
               onChange={(r) => {
                 setRules(r);
                 setPage(1);
               }}
-              quick={
-                filters.length
-                  ? filters.map((f) => (
-                      <div key={f.key} className="grid gap-1">
-                        <label className="text-xs text-muted-foreground">{f.label}</label>
-                        <Select
-                          value={legacy[f.key] ?? "all"}
-                          onValueChange={(v) => {
-                            setLegacy((p) => ({ ...p, [f.key]: v }));
-                            setPage(1);
-                          }}
-                        >
-                          <SelectTrigger className="w-full min-w-0">
-                            <SelectValue placeholder={f.label} />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="all">الكل</SelectItem>
-                            {f.options.map((o) => (
-                              <SelectItem key={o.value} value={o.value}>
-                                {o.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    ))
-                  : undefined
-              }
             />
           ) : null}
           {dateKey ? (
@@ -1048,20 +1019,31 @@ export function DataTable<T>({
             />
           ) : null}
           {sortOptions.length ? (
-            <Select value={sort} onValueChange={setSort}>
-              <SelectTrigger className="w-36">
-                <ArrowDownUp className="size-4 text-muted-foreground" />
-                <SelectValue placeholder="الترتيب" />
-              </SelectTrigger>
-              <SelectContent>
-                {sortOptions.map((o) => (
-                  <SelectItem key={o.value} value={o.value}>
-                    {o.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline" size="icon" aria-label="الترتيب" className="relative shrink-0">
+                  <ArrowDownUp className="size-4" />
+                  {sort ? <span className="absolute -top-1 -start-1 size-2.5 rounded-full bg-primary" /> : null}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent align="start" className="w-52 p-1.5">
+                <div className="grid gap-0.5">
+                  {sortOptions.map((o) => (
+                    <Button
+                      key={o.value}
+                      variant={sort === o.value ? "secondary" : "ghost"}
+                      size="sm"
+                      className="justify-start"
+                      onClick={() => setSort(sort === o.value ? "" : o.value)}
+                    >
+                      {o.label}
+                    </Button>
+                  ))}
+                </div>
+              </PopoverContent>
+            </Popover>
           ) : null}
+
         </div>
         {toolbar}
       </div>
