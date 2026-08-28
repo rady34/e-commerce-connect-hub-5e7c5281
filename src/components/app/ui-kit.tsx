@@ -838,23 +838,28 @@ export function DataTable<T>({
   const showCheckbox = Boolean(bulkActions);
   const allOnPageSelected = slice.length > 0 && slice.every((r, i) => selected.has(rowId(r, (current - 1) * pageSize + i)));
 
+  const framed = (node: React.ReactNode) => (
+    <div className="overflow-hidden rounded-xl border border-border/80 bg-card shadow-card">{node}</div>
+  );
+
   const body = () => {
-    if (loading) return <LoadingState />;
-    if (error) return <ErrorState onRetry={onRetry} />;
+    if (loading) return framed(<LoadingState />);
+    if (error) return framed(<ErrorState onRetry={onRetry} />);
     if (slice.length === 0) {
-      if (q.trim()) return <SearchEmptyState onClear={() => setQ("")} />;
+      if (q.trim()) return framed(<SearchEmptyState onClear={() => setQ("")} />);
       if (activeFilterCount > 0 || dateValue.preset !== "all")
-        return (
+        return framed(
           <FilterEmptyState
             onClear={() => {
               setRules([]);
               setLegacy({});
               setDateValue({ preset: "all" });
             }}
-          />
+          />,
         );
-      return <EmptyState />;
+      return framed(<EmptyState />);
     }
+
 
     const cardList = (
       <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
