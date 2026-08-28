@@ -62,12 +62,13 @@ function SidebarNav({
                 to={item.to}
                 onClick={onNavigate}
                 className={cn(
-                  "flex flex-1 items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13px] font-medium transition-colors",
+                  "flex flex-1 items-center gap-2 rounded-lg px-2 py-1.5 text-[12.5px] font-medium transition-colors",
                   active
                     ? "bg-primary/10 text-primary"
                     : "text-sidebar-foreground/75 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                   collapsed && "justify-center px-2",
                 )}
+
                 title={item.label}
               >
                 <item.icon className="size-[18px] shrink-0" />
