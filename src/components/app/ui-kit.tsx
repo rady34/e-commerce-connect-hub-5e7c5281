@@ -436,7 +436,7 @@ function FilterRowEditor({
             });
           }}
         >
-          <SelectTrigger size="sm" className="w-full min-w-0 flex-1 [&>span]:truncate">
+          <SelectTrigger className="h-8 text-[13px] w-full min-w-0 flex-1 [&>span]:truncate">
             <SelectValue placeholder="اسم العنصر" />
           </SelectTrigger>
           <SelectContent>
@@ -460,7 +460,7 @@ function FilterRowEditor({
 
       <div className="grid gap-1.5">
         <Select value={rule.operator} onValueChange={(v) => onChange({ ...rule, operator: v as Operator })}>
-          <SelectTrigger size="sm" className="w-full min-w-0 [&>span]:truncate">
+          <SelectTrigger className="h-8 text-[13px] w-full min-w-0 [&>span]:truncate">
             <SelectValue placeholder="الشرط" />
           </SelectTrigger>
           <SelectContent>
@@ -477,7 +477,7 @@ function FilterRowEditor({
             <Input disabled placeholder="—" className="h-8 w-full text-sm" />
           ) : field?.type === "select" ? (
             <Select value={rule.value} onValueChange={(v) => onChange({ ...rule, value: v })}>
-              <SelectTrigger size="sm" className="w-full min-w-0 [&>span]:truncate">
+              <SelectTrigger className="h-8 text-[13px] w-full min-w-0 [&>span]:truncate">
                 <SelectValue placeholder="القيمة" />
               </SelectTrigger>
               <SelectContent>
