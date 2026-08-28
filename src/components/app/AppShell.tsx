@@ -51,7 +51,7 @@ function SidebarNav({
   const [open, setOpen] = React.useState<string | null>(null);
 
   return (
-    <nav className="space-y-0.5 p-2.5">
+    <nav className="space-y-0.5 p-2">
       {items.map((item) => {
         const active = pathname === item.to || (item.to !== "/admin" && pathname.startsWith(item.to + "/"));
         const isOpen = open === item.label;
