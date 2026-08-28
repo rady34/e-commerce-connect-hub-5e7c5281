@@ -870,7 +870,7 @@ export function DataTable<T>({
 
 
     const cardList = (
-      <ul className="grid items-stretch gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+      <ul className="grid items-stretch gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         {slice.map((row, i) => {
           const idx = (current - 1) * pageSize + i;
           const id = rowId(row, idx);
@@ -882,7 +882,7 @@ export function DataTable<T>({
               key={id}
               onClick={() => onRowClick?.(row)}
               className={cn(
-                "group flex h-full flex-col gap-1 rounded-lg border border-border/80 bg-card p-2 shadow-[0_2px_0_0_var(--sidebar-border),0_3px_8px_-2px_oklch(0.25_0.02_200/0.08)] transition-all duration-200",
+                "group flex h-full flex-col gap-1 rounded-lg border border-border/80 bg-card p-1.5 shadow-[0_2px_0_0_var(--sidebar-border),0_3px_8px_-2px_oklch(0.25_0.02_200/0.08)] transition-all duration-200",
                 onRowClick && "cursor-pointer hover:-translate-y-0.5 hover:border-primary/40 hover:bg-muted/20 hover:shadow-[0_4px_0_0_var(--sidebar-border),0_8px_14px_-4px_oklch(0.25_0.02_200/0.14)]",
               )}
             >
@@ -896,7 +896,7 @@ export function DataTable<T>({
                   {head ? (head.render ? head.render(row) : String((row as Record<string, unknown>)[head.key] ?? "—")) : null}
                 </p>
               </div>
-              <dl className="grid grid-cols-2 gap-x-2 gap-y-1 border-t border-border/60 pt-1.5">
+              <dl className="grid grid-cols-3 gap-x-2 gap-y-1 border-t border-border/60 pt-1">
                 {rest.map((c) => (
                   <div key={c.key} className="min-w-0">
                     <dt className="truncate text-[9px] text-muted-foreground">{c.header}</dt>
@@ -908,7 +908,7 @@ export function DataTable<T>({
               </dl>
               {actions ? (
                 <div
-                  className="mt-auto flex flex-wrap items-center justify-end gap-1 border-t border-border/60 pt-1.5"
+                  className="mt-auto flex flex-wrap items-center justify-end gap-1 border-t border-border/60 pt-1"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {actions.render ? actions.render(row) : null}
