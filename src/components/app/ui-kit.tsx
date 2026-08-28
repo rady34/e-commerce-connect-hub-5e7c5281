@@ -512,17 +512,12 @@ export function AdvancedFilters({
   fields,
   rules,
   onChange,
-  quick,
   activeCount,
-  onClearQuick,
 }: {
   fields: FilterField[];
   rules: FilterRule[];
   onChange: (rules: FilterRule[]) => void;
-  /** فلاتر سريعة تُعرض داخل نفس النافذة لتقليل ازدحام الواجهة */
-  quick?: React.ReactNode;
   activeCount?: number;
-  onClearQuick?: () => void;
 }) {
   const badgeCount = activeCount ?? rules.length;
   const addRule = () => {
@@ -546,30 +541,20 @@ export function AdvancedFilters({
           ) : null}
         </Button>
       </PopoverTrigger>
-      <PopoverContent align="start" className="w-[min(92vw,34rem)] p-3">
+      <PopoverContent align="start" className="w-[min(88vw,17rem)] overflow-hidden p-2.5">
         <div className="flex items-center justify-between gap-2">
-          <p className="text-sm font-semibold">الفلاتر المتقدمة</p>
+          <p className="text-[13px] font-semibold">الفلاتر المتقدمة</p>
           {badgeCount ? (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => {
-                onChange([]);
-                onClearQuick?.();
-              }}
-            >
+            <Button variant="ghost" size="sm" className="h-7 px-2 text-xs" onClick={() => onChange([])}>
               مسح الكل
             </Button>
           ) : null}
         </div>
-        <Separator className="my-3" />
-        {quick ? (
-          <div className="mb-3 grid gap-2 sm:grid-cols-2">{quick}</div>
-        ) : null}
+        <Separator className="my-2" />
         {rules.length === 0 ? (
-          <p className="py-4 text-center text-sm text-muted-foreground">لم تتم إضافة أي فلاتر بعد.</p>
+          <p className="py-3 text-center text-xs text-muted-foreground">لم تتم إضافة أي فلاتر بعد.</p>
         ) : (
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             {rules.map((r) => (
               <FilterRowEditor
                 key={r.id}
@@ -581,13 +566,14 @@ export function AdvancedFilters({
             ))}
           </div>
         )}
-        <Button variant="outline" size="sm" className="mt-3 w-full" onClick={addRule}>
+        <Button variant="outline" size="sm" className="mt-2 w-full" onClick={addRule}>
           + إضافة فلتر
         </Button>
       </PopoverContent>
     </Popover>
   );
 }
+
 
 export type DatePreset = "all" | "today" | "yesterday" | "7d" | "30d" | "month" | "prev-month" | "custom";
 
