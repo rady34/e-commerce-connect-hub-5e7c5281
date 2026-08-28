@@ -51,7 +51,7 @@ function SidebarNav({
   const [open, setOpen] = React.useState<string | null>(null);
 
   return (
-    <nav className="space-y-0.5 p-2.5">
+    <nav className="space-y-0.5 p-2">
       {items.map((item) => {
         const active = pathname === item.to || (item.to !== "/admin" && pathname.startsWith(item.to + "/"));
         const isOpen = open === item.label;
@@ -62,12 +62,13 @@ function SidebarNav({
                 to={item.to}
                 onClick={onNavigate}
                 className={cn(
-                  "flex flex-1 items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13px] font-medium transition-colors",
+                  "flex flex-1 items-center gap-2 rounded-lg px-2 py-1.5 text-[12.5px] font-medium transition-colors",
                   active
                     ? "bg-primary/10 text-primary"
                     : "text-sidebar-foreground/75 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                   collapsed && "justify-center px-2",
                 )}
+
                 title={item.label}
               >
                 <item.icon className="size-[18px] shrink-0" />
@@ -77,21 +78,21 @@ function SidebarNav({
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? null : item.label)}
-                  className="rounded-md p-1.5 text-sidebar-foreground/60 hover:bg-sidebar-accent"
+                  className="rounded-md p-1 text-sidebar-foreground/60 hover:bg-sidebar-accent"
                   aria-label="فتح القائمة الفرعية"
                 >
-                  <ChevronDown className={cn("size-4 transition-transform", isOpen && "rotate-180")} />
+                  <ChevronDown className={cn("size-3.5 transition-transform", isOpen && "rotate-180")} />
                 </button>
               ) : null}
             </div>
             {!collapsed && item.children && isOpen ? (
-              <div className="my-1 space-y-1 border-e-2 border-sidebar-border pe-3 me-4">
+              <div className="my-1 space-y-0.5 border-e-2 border-sidebar-border pe-2 me-3">
                 {item.children.map((c) => (
                   <AnyLink
                     key={c.label}
                     to={c.to}
                     onClick={onNavigate}
-                    className="block rounded-md px-3 py-2 text-[13px] text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                    className="block truncate rounded-md px-2 py-1.5 text-[12px] text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                   >
                     {c.label}
                   </AnyLink>
@@ -327,12 +328,12 @@ export function AppShell({ role, children }: { role: AppRole; children: React.Re
   );
 
   return (
-    <div className="flex min-h-screen bg-muted/40">
-      {/* Desktop sidebar */}
+    <div className="flex min-h-screen bg-muted/40" dir="rtl">
+      {/* Desktop sidebar (RTL: يفتح من جهة اليمين) */}
       <aside
         className={cn(
           "sticky top-0 hidden h-screen shrink-0 border-e border-sidebar-border transition-all duration-200 lg:block",
-          collapsed ? "w-[64px]" : "w-[15rem]",
+          collapsed ? "w-[60px]" : "w-[12.5rem]",
         )}
       >
         {sidebar}
@@ -342,9 +343,10 @@ export function AppShell({ role, children }: { role: AppRole; children: React.Re
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-overlay" onClick={() => setMobileOpen(false)} />
-          <div className="absolute inset-y-0 start-0 w-64 shadow-xl">{sidebar}</div>
+          <div className="absolute inset-y-0 start-0 w-[13.5rem] shadow-xl">{sidebar}</div>
         </div>
       )}
+
 
       <div className="flex min-w-0 flex-1 flex-col">
         <PreviewBanner />

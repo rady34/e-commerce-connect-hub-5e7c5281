@@ -421,8 +421,8 @@ function FilterRowEditor({
   const needsValue = rule.operator !== "empty" && rule.operator !== "nempty";
 
   return (
-    <div className="space-y-2 rounded-lg border border-border/70 bg-muted/25 p-2">
-      <div className="flex items-center gap-2">
+    <div className="space-y-1.5 rounded-lg border border-border/70 bg-muted/25 p-2">
+      <div className="flex items-center gap-1.5">
         <Select
           value={rule.field}
           onValueChange={(v) => {
@@ -436,7 +436,7 @@ function FilterRowEditor({
             });
           }}
         >
-          <SelectTrigger size="sm" className="min-w-0 flex-1">
+          <SelectTrigger className="h-8 text-[13px] w-full min-w-0 flex-1 [&>span]:truncate">
             <SelectValue placeholder="اسم العنصر" />
           </SelectTrigger>
           <SelectContent>
@@ -458,9 +458,9 @@ function FilterRowEditor({
         </Button>
       </div>
 
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid gap-1.5">
         <Select value={rule.operator} onValueChange={(v) => onChange({ ...rule, operator: v as Operator })}>
-          <SelectTrigger size="sm" className="w-full min-w-0">
+          <SelectTrigger className="h-8 text-[13px] w-full min-w-0 [&>span]:truncate">
             <SelectValue placeholder="الشرط" />
           </SelectTrigger>
           <SelectContent>
@@ -474,10 +474,10 @@ function FilterRowEditor({
 
         <div className="w-full min-w-0">
           {!needsValue ? (
-            <Input disabled placeholder="—" className="h-8 text-sm" />
+            <Input disabled placeholder="—" className="h-8 w-full text-sm" />
           ) : field?.type === "select" ? (
             <Select value={rule.value} onValueChange={(v) => onChange({ ...rule, value: v })}>
-              <SelectTrigger size="sm" className="w-full min-w-0">
+              <SelectTrigger className="h-8 text-[13px] w-full min-w-0 [&>span]:truncate">
                 <SelectValue placeholder="القيمة" />
               </SelectTrigger>
               <SelectContent>
@@ -498,31 +498,26 @@ function FilterRowEditor({
               value={rule.value}
               onChange={(e) => onChange({ ...rule, value: e.target.value })}
               placeholder="القيمة"
-              className="h-8 min-w-0 text-sm"
+              className="h-8 w-full min-w-0 text-sm"
             />
           )}
         </div>
       </div>
     </div>
   );
-
 }
+
 
 export function AdvancedFilters({
   fields,
   rules,
   onChange,
-  quick,
   activeCount,
-  onClearQuick,
 }: {
   fields: FilterField[];
   rules: FilterRule[];
   onChange: (rules: FilterRule[]) => void;
-  /** فلاتر سريعة تُعرض داخل نفس النافذة لتقليل ازدحام الواجهة */
-  quick?: React.ReactNode;
   activeCount?: number;
-  onClearQuick?: () => void;
 }) {
   const badgeCount = activeCount ?? rules.length;
   const addRule = () => {
@@ -546,30 +541,20 @@ export function AdvancedFilters({
           ) : null}
         </Button>
       </PopoverTrigger>
-      <PopoverContent align="start" className="w-[min(92vw,34rem)] p-3">
+      <PopoverContent align="start" className="w-[min(88vw,17rem)] overflow-hidden p-2.5">
         <div className="flex items-center justify-between gap-2">
-          <p className="text-sm font-semibold">الفلاتر المتقدمة</p>
+          <p className="text-[13px] font-semibold">الفلاتر المتقدمة</p>
           {badgeCount ? (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => {
-                onChange([]);
-                onClearQuick?.();
-              }}
-            >
+            <Button variant="ghost" size="sm" className="h-7 px-2 text-xs" onClick={() => onChange([])}>
               مسح الكل
             </Button>
           ) : null}
         </div>
-        <Separator className="my-3" />
-        {quick ? (
-          <div className="mb-3 grid gap-2 sm:grid-cols-2">{quick}</div>
-        ) : null}
+        <Separator className="my-2" />
         {rules.length === 0 ? (
-          <p className="py-4 text-center text-sm text-muted-foreground">لم تتم إضافة أي فلاتر بعد.</p>
+          <p className="py-3 text-center text-xs text-muted-foreground">لم تتم إضافة أي فلاتر بعد.</p>
         ) : (
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             {rules.map((r) => (
               <FilterRowEditor
                 key={r.id}
@@ -581,13 +566,14 @@ export function AdvancedFilters({
             ))}
           </div>
         )}
-        <Button variant="outline" size="sm" className="mt-3 w-full" onClick={addRule}>
+        <Button variant="outline" size="sm" className="mt-2 w-full" onClick={addRule}>
           + إضافة فلتر
         </Button>
       </PopoverContent>
     </Popover>
   );
 }
+
 
 export type DatePreset = "all" | "today" | "yesterday" | "7d" | "30d" | "month" | "prev-month" | "custom";
 
@@ -762,7 +748,7 @@ export function DataTable<T>({
   dateKey?: keyof T;
   bulkActions?: (selected: T[], clear: () => void) => React.ReactNode;
   getRowId?: (row: T, index: number) => string;
-  /** auto = بطاقات على الموبايل وجدول على الشاشات الكبيرة */
+  /** auto = بطاقات منفصلة على كل المقاسات */
   variant?: "auto" | "table" | "cards";
   searchPlaceholder?: string;
 }) {
@@ -773,6 +759,14 @@ export function DataTable<T>({
   const [dateValue, setDateValue] = React.useState<DateRangeValue>({ preset: "all" });
   const [sort, setSort] = React.useState<string>("");
   const [selected, setSelected] = React.useState<Set<string>>(new Set());
+
+  const effectiveDateKey = React.useMemo(
+    () =>
+      dateKey ??
+      (columns.find((c) => (c.type ?? inferType(data.map((r) => (r as Record<string, unknown>)[c.key]))) === "date")
+        ?.key as keyof T | undefined),
+    [dateKey, columns, data],
+  );
 
   const rowId = React.useCallback((row: T, i: number) => getRowId?.(row, i) ?? String(i), [getRowId]);
 
@@ -819,10 +813,10 @@ export function DataTable<T>({
       if (needsValue && rule.value === "") continue;
       rows = rows.filter((r) => matchRule((r as Record<string, unknown>)[rule.field], rule, fieldType(rule.field)));
     }
-    if (dateKey && dateValue.preset !== "all") {
+    if (effectiveDateKey && dateValue.preset !== "all") {
       const { from, to } = resolveDateRange(dateValue);
       rows = rows.filter((r) => {
-        const t = new Date(String(r[dateKey] ?? "")).getTime();
+        const t = new Date(String(r[effectiveDateKey] ?? "")).getTime();
         if (!Number.isFinite(t)) return false;
         if (from && t < from.getTime()) return false;
         if (to && t > to.getTime()) return false;
@@ -832,7 +826,7 @@ export function DataTable<T>({
     const s = sortOptions.find((o) => o.value === sort);
     if (s) rows = [...rows].sort(s.compare);
     return rows;
-  }, [searched, filters, legacy, rules, fieldType, dateKey, dateValue, sort, sortOptions]);
+  }, [searched, filters, legacy, rules, fieldType, effectiveDateKey, dateValue, sort, sortOptions]);
 
   const pages = Math.max(1, Math.ceil(filtered.length / pageSize));
   const current = Math.min(page, pages);
@@ -852,35 +846,45 @@ export function DataTable<T>({
   const showCheckbox = Boolean(bulkActions);
   const allOnPageSelected = slice.length > 0 && slice.every((r, i) => selected.has(rowId(r, (current - 1) * pageSize + i)));
 
+  const framed = (node: React.ReactNode) => (
+    <div className="overflow-hidden rounded-xl border border-border/80 bg-card shadow-card">{node}</div>
+  );
+
   const body = () => {
-    if (loading) return <LoadingState />;
-    if (error) return <ErrorState onRetry={onRetry} />;
+    if (loading) return framed(<LoadingState />);
+    if (error) return framed(<ErrorState onRetry={onRetry} />);
     if (slice.length === 0) {
-      if (q.trim()) return <SearchEmptyState onClear={() => setQ("")} />;
+      if (q.trim()) return framed(<SearchEmptyState onClear={() => setQ("")} />);
       if (activeFilterCount > 0 || dateValue.preset !== "all")
-        return (
+        return framed(
           <FilterEmptyState
             onClear={() => {
               setRules([]);
               setLegacy({});
               setDateValue({ preset: "all" });
             }}
-          />
+          />,
         );
-      return <EmptyState />;
+      return framed(<EmptyState />);
     }
 
+
     const cardList = (
-      <ul className="divide-y">
+      <ul className="grid items-stretch gap-3 sm:grid-cols-2 xl:grid-cols-3">
         {slice.map((row, i) => {
           const idx = (current - 1) * pageSize + i;
           const id = rowId(row, idx);
-          const [head, ...rest] = columns;
+          const [head, ...others] = columns;
+          const actions = others.find((c) => c.key === "actions");
+          const rest = others.filter((c) => c.key !== "actions");
           return (
             <li
               key={id}
               onClick={() => onRowClick?.(row)}
-              className={cn("space-y-2 p-4", onRowClick && "cursor-pointer hover:bg-muted/40")}
+              className={cn(
+                "flex h-full flex-col gap-3 rounded-xl border border-border/80 bg-card p-4 shadow-card transition-colors",
+                onRowClick && "cursor-pointer hover:border-primary/40 hover:bg-muted/30",
+              )}
             >
               <div className="flex items-start gap-2">
                 {showCheckbox ? (
@@ -888,25 +892,34 @@ export function DataTable<T>({
                     <Checkbox checked={selected.has(id)} onCheckedChange={() => toggleRow(id)} aria-label="تحديد عنصر" />
                   </span>
                 ) : null}
-                <p className="min-w-0 flex-1 truncate font-semibold">
+                <p className="min-w-0 flex-1 truncate text-[15px] font-semibold">
                   {head ? (head.render ? head.render(row) : String((row as Record<string, unknown>)[head.key] ?? "—")) : null}
                 </p>
               </div>
-              <dl className="grid grid-cols-2 gap-x-3 gap-y-2">
+              <dl className="grid grid-cols-2 gap-x-3 gap-y-2.5 border-t border-border/60 pt-3">
                 {rest.map((c) => (
                   <div key={c.key} className="min-w-0">
-                    <dt className="truncate text-xs text-muted-foreground">{c.header}</dt>
+                    <dt className="truncate text-[11px] text-muted-foreground">{c.header}</dt>
                     <dd className="truncate text-sm font-medium">
                       {c.render ? c.render(row) : String((row as Record<string, unknown>)[c.key] ?? "—")}
                     </dd>
                   </div>
                 ))}
               </dl>
+              {actions ? (
+                <div
+                  className="mt-auto flex flex-wrap items-center justify-end gap-1.5 border-t border-border/60 pt-3"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {actions.render ? actions.render(row) : null}
+                </div>
+              ) : null}
             </li>
           );
         })}
       </ul>
     );
+
 
     const table = (
       <div className="overflow-x-auto">
@@ -969,14 +982,10 @@ export function DataTable<T>({
       </div>
     );
 
-    if (variant === "cards") return cardList;
-    if (variant === "table") return table;
-    return (
-      <>
-        <div className="lg:hidden">{cardList}</div>
-        <div className="hidden lg:block">{table}</div>
-      </>
-    );
+
+    if (variant === "table") return framed(table);
+    return cardList;
+
   };
 
   return (
@@ -991,47 +1000,18 @@ export function DataTable<T>({
             }}
             placeholder={searchPlaceholder}
           />
-          {fields.length || filters.length ? (
+          {fields.length ? (
             <AdvancedFilters
               fields={fields}
               rules={rules}
               activeCount={activeFilterCount}
-              onClearQuick={() => setLegacy({})}
               onChange={(r) => {
                 setRules(r);
                 setPage(1);
               }}
-              quick={
-                filters.length
-                  ? filters.map((f) => (
-                      <div key={f.key} className="grid gap-1">
-                        <label className="text-xs text-muted-foreground">{f.label}</label>
-                        <Select
-                          value={legacy[f.key] ?? "all"}
-                          onValueChange={(v) => {
-                            setLegacy((p) => ({ ...p, [f.key]: v }));
-                            setPage(1);
-                          }}
-                        >
-                          <SelectTrigger className="w-full min-w-0">
-                            <SelectValue placeholder={f.label} />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="all">الكل</SelectItem>
-                            {f.options.map((o) => (
-                              <SelectItem key={o.value} value={o.value}>
-                                {o.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    ))
-                  : undefined
-              }
             />
           ) : null}
-          {dateKey ? (
+          {effectiveDateKey ? (
             <DateFilter
               value={dateValue}
               onChange={(v) => {
@@ -1041,20 +1021,31 @@ export function DataTable<T>({
             />
           ) : null}
           {sortOptions.length ? (
-            <Select value={sort} onValueChange={setSort}>
-              <SelectTrigger className="w-36">
-                <ArrowDownUp className="size-4 text-muted-foreground" />
-                <SelectValue placeholder="الترتيب" />
-              </SelectTrigger>
-              <SelectContent>
-                {sortOptions.map((o) => (
-                  <SelectItem key={o.value} value={o.value}>
-                    {o.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline" size="icon" aria-label="الترتيب" className="relative shrink-0">
+                  <ArrowDownUp className="size-4" />
+                  {sort ? <span className="absolute -top-1 -start-1 size-2.5 rounded-full bg-primary" /> : null}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent align="start" className="w-52 p-1.5">
+                <div className="grid gap-0.5">
+                  {sortOptions.map((o) => (
+                    <Button
+                      key={o.value}
+                      variant={sort === o.value ? "secondary" : "ghost"}
+                      size="sm"
+                      className="justify-start"
+                      onClick={() => setSort(sort === o.value ? "" : o.value)}
+                    >
+                      {o.label}
+                    </Button>
+                  ))}
+                </div>
+              </PopoverContent>
+            </Popover>
           ) : null}
+
         </div>
         {toolbar}
       </div>
@@ -1069,7 +1060,7 @@ export function DataTable<T>({
         </div>
       ) : null}
 
-      <div className="overflow-hidden rounded-xl border border-border/80 bg-card shadow-card">{body()}</div>
+      {body()}
 
       <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
         <p className="text-xs text-muted-foreground">
