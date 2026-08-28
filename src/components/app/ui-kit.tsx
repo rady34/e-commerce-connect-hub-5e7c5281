@@ -870,7 +870,7 @@ export function DataTable<T>({
 
 
     const cardList = (
-      <ul className="grid items-stretch gap-3 grid-cols-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+      <ul className="grid items-stretch gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         {slice.map((row, i) => {
           const idx = (current - 1) * pageSize + i;
           const id = rowId(row, idx);
