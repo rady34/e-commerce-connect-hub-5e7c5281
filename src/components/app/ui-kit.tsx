@@ -857,16 +857,21 @@ export function DataTable<T>({
     }
 
     const cardList = (
-      <ul className="divide-y">
+      <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
         {slice.map((row, i) => {
           const idx = (current - 1) * pageSize + i;
           const id = rowId(row, idx);
-          const [head, ...rest] = columns;
+          const [head, ...others] = columns;
+          const actions = others.find((c) => c.key === "actions");
+          const rest = others.filter((c) => c.key !== "actions");
           return (
             <li
               key={id}
               onClick={() => onRowClick?.(row)}
-              className={cn("space-y-2 p-4", onRowClick && "cursor-pointer hover:bg-muted/40")}
+              className={cn(
+                "flex flex-col gap-3 rounded-xl border border-border/80 bg-card p-4 shadow-card transition-colors",
+                onRowClick && "cursor-pointer hover:border-primary/40 hover:bg-muted/30",
+              )}
             >
               <div className="flex items-start gap-2">
                 {showCheckbox ? (
@@ -874,25 +879,34 @@ export function DataTable<T>({
                     <Checkbox checked={selected.has(id)} onCheckedChange={() => toggleRow(id)} aria-label="تحديد عنصر" />
                   </span>
                 ) : null}
-                <p className="min-w-0 flex-1 truncate font-semibold">
+                <p className="min-w-0 flex-1 truncate text-[15px] font-semibold">
                   {head ? (head.render ? head.render(row) : String((row as Record<string, unknown>)[head.key] ?? "—")) : null}
                 </p>
               </div>
-              <dl className="grid grid-cols-2 gap-x-3 gap-y-2">
+              <dl className="grid grid-cols-2 gap-x-3 gap-y-2.5 border-t border-border/60 pt-3">
                 {rest.map((c) => (
                   <div key={c.key} className="min-w-0">
-                    <dt className="truncate text-xs text-muted-foreground">{c.header}</dt>
+                    <dt className="truncate text-[11px] text-muted-foreground">{c.header}</dt>
                     <dd className="truncate text-sm font-medium">
                       {c.render ? c.render(row) : String((row as Record<string, unknown>)[c.key] ?? "—")}
                     </dd>
                   </div>
                 ))}
               </dl>
+              {actions ? (
+                <div
+                  className="flex flex-wrap items-center justify-end gap-1.5 border-t border-border/60 pt-3"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {actions.render ? actions.render(row) : null}
+                </div>
+              ) : null}
             </li>
           );
         })}
       </ul>
     );
+
 
     const table = (
       <div className="overflow-x-auto">
