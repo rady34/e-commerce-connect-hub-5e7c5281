@@ -748,7 +748,7 @@ export function DataTable<T>({
   dateKey?: keyof T;
   bulkActions?: (selected: T[], clear: () => void) => React.ReactNode;
   getRowId?: (row: T, index: number) => string;
-  /** auto = بطاقات على الموبايل وجدول على الشاشات الكبيرة */
+  /** auto = بطاقات منفصلة على كل المقاسات */
   variant?: "auto" | "table" | "cards";
   searchPlaceholder?: string;
 }) {
@@ -975,14 +975,8 @@ export function DataTable<T>({
     );
 
 
-    if (variant === "cards") return cardList;
     if (variant === "table") return framed(table);
-    return (
-      <>
-        <div className="lg:hidden">{cardList}</div>
-        <div className="hidden lg:block">{framed(table)}</div>
-      </>
-    );
+    return cardList;
 
   };
 
