@@ -421,8 +421,8 @@ function FilterRowEditor({
   const needsValue = rule.operator !== "empty" && rule.operator !== "nempty";
 
   return (
-    <div className="space-y-2 rounded-lg border border-border/70 bg-muted/25 p-2">
-      <div className="flex items-center gap-2">
+    <div className="space-y-1.5 rounded-lg border border-border/70 bg-muted/25 p-2">
+      <div className="flex items-center gap-1.5">
         <Select
           value={rule.field}
           onValueChange={(v) => {
@@ -436,7 +436,7 @@ function FilterRowEditor({
             });
           }}
         >
-          <SelectTrigger size="sm" className="min-w-0 flex-1">
+          <SelectTrigger size="sm" className="w-full min-w-0 flex-1 [&>span]:truncate">
             <SelectValue placeholder="اسم العنصر" />
           </SelectTrigger>
           <SelectContent>
@@ -458,9 +458,9 @@ function FilterRowEditor({
         </Button>
       </div>
 
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid gap-1.5">
         <Select value={rule.operator} onValueChange={(v) => onChange({ ...rule, operator: v as Operator })}>
-          <SelectTrigger size="sm" className="w-full min-w-0">
+          <SelectTrigger size="sm" className="w-full min-w-0 [&>span]:truncate">
             <SelectValue placeholder="الشرط" />
           </SelectTrigger>
           <SelectContent>
@@ -474,10 +474,10 @@ function FilterRowEditor({
 
         <div className="w-full min-w-0">
           {!needsValue ? (
-            <Input disabled placeholder="—" className="h-8 text-sm" />
+            <Input disabled placeholder="—" className="h-8 w-full text-sm" />
           ) : field?.type === "select" ? (
             <Select value={rule.value} onValueChange={(v) => onChange({ ...rule, value: v })}>
-              <SelectTrigger size="sm" className="w-full min-w-0">
+              <SelectTrigger size="sm" className="w-full min-w-0 [&>span]:truncate">
                 <SelectValue placeholder="القيمة" />
               </SelectTrigger>
               <SelectContent>
@@ -498,15 +498,15 @@ function FilterRowEditor({
               value={rule.value}
               onChange={(e) => onChange({ ...rule, value: e.target.value })}
               placeholder="القيمة"
-              className="h-8 min-w-0 text-sm"
+              className="h-8 w-full min-w-0 text-sm"
             />
           )}
         </div>
       </div>
     </div>
   );
-
 }
+
 
 export function AdvancedFilters({
   fields,
