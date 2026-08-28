@@ -1058,7 +1058,7 @@ export function DataTable<T>({
         </div>
       ) : null}
 
-      <div className="overflow-hidden rounded-xl border border-border/80 bg-card shadow-card">{body()}</div>
+      {body()}
 
       <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
         <p className="text-xs text-muted-foreground">
