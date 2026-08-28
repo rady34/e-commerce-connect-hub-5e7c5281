@@ -51,7 +51,7 @@ function SidebarNav({
   const [open, setOpen] = React.useState<string | null>(null);
 
   return (
-    <nav className="space-y-0.5 p-2">
+    <nav className="space-y-0.5 p-1.5" dir="rtl">
       {items.map((item) => {
         const active = pathname === item.to || (item.to !== "/admin" && pathname.startsWith(item.to + "/"));
         const isOpen = open === item.label;
@@ -62,16 +62,16 @@ function SidebarNav({
                 to={item.to}
                 onClick={onNavigate}
                 className={cn(
-                  "flex flex-1 items-center gap-2 rounded-lg px-2 py-1.5 text-[12.5px] font-medium transition-colors",
+                  "flex flex-1 items-center gap-1.5 rounded-md px-2 py-1.5 text-[12px] font-medium transition-colors text-right",
                   active
                     ? "bg-primary/10 text-primary"
                     : "text-sidebar-foreground/75 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-                  collapsed && "justify-center px-2",
+                  collapsed && "justify-center px-1.5",
                 )}
 
                 title={item.label}
               >
-                <item.icon className="size-[18px] shrink-0" />
+                <item.icon className="size-[17px] shrink-0" />
                 {!collapsed && <span className="truncate">{item.label}</span>}
               </AnyLink>
               {!collapsed && item.children ? (
@@ -86,13 +86,13 @@ function SidebarNav({
               ) : null}
             </div>
             {!collapsed && item.children && isOpen ? (
-              <div className="my-1 space-y-0.5 border-e-2 border-sidebar-border pe-2 me-3">
+              <div className="my-1 space-y-0.5 border-e-2 border-sidebar-border pe-2 me-2.5">
                 {item.children.map((c) => (
                   <AnyLink
                     key={c.label}
                     to={c.to}
                     onClick={onNavigate}
-                    className="block truncate rounded-md px-2 py-1.5 text-[12px] text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                    className="block truncate rounded-md px-2 py-1.5 text-[11.5px] text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-right"
                   >
                     {c.label}
                   </AnyLink>
@@ -333,7 +333,7 @@ export function AppShell({ role, children }: { role: AppRole; children: React.Re
       <aside
         className={cn(
           "sticky top-0 hidden h-screen shrink-0 border-e border-sidebar-border transition-all duration-200 lg:block",
-          collapsed ? "w-[60px]" : "w-[12.5rem]",
+          collapsed ? "w-[52px]" : "w-[10.5rem]",
         )}
       >
         {sidebar}
@@ -343,7 +343,7 @@ export function AppShell({ role, children }: { role: AppRole; children: React.Re
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-overlay" onClick={() => setMobileOpen(false)} />
-          <div className="absolute inset-y-0 start-0 w-[13.5rem] shadow-xl">{sidebar}</div>
+          <div className="absolute inset-y-0 start-0 w-[11.5rem] shadow-xl">{sidebar}</div>
         </div>
       )}
 
