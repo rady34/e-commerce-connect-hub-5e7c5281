@@ -974,9 +974,6 @@ export function DataTable<T>({
       </div>
     );
 
-    const framed = (node: React.ReactNode) => (
-      <div className="overflow-hidden rounded-xl border border-border/80 bg-card shadow-card">{node}</div>
-    );
 
     if (variant === "cards") return cardList;
     if (variant === "table") return framed(table);
