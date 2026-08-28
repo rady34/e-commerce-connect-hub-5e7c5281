@@ -969,14 +969,19 @@ export function DataTable<T>({
       </div>
     );
 
+    const framed = (node: React.ReactNode) => (
+      <div className="overflow-hidden rounded-xl border border-border/80 bg-card shadow-card">{node}</div>
+    );
+
     if (variant === "cards") return cardList;
-    if (variant === "table") return table;
+    if (variant === "table") return framed(table);
     return (
       <>
         <div className="lg:hidden">{cardList}</div>
-        <div className="hidden lg:block">{table}</div>
+        <div className="hidden lg:block">{framed(table)}</div>
       </>
     );
+
   };
 
   return (
