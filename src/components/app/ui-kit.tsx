@@ -760,6 +760,11 @@ export function DataTable<T>({
   const [sort, setSort] = React.useState<string>("");
   const [selected, setSelected] = React.useState<Set<string>>(new Set());
 
+  const effectiveDateKey = React.useMemo(
+    () => dateKey ?? (columns.find((c) => c.type === "date")?.key as keyof T | undefined),
+    [dateKey, columns],
+  );
+
   const rowId = React.useCallback((row: T, i: number) => getRowId?.(row, i) ?? String(i), [getRowId]);
 
   /* حقول الفلاتر المتقدمة تُشتق ديناميكيًا من الأعمدة والبيانات */
@@ -862,7 +867,7 @@ export function DataTable<T>({
 
 
     const cardList = (
-      <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+      <ul className="grid items-stretch gap-3 sm:grid-cols-2 xl:grid-cols-3">
         {slice.map((row, i) => {
           const idx = (current - 1) * pageSize + i;
           const id = rowId(row, idx);
@@ -874,7 +879,7 @@ export function DataTable<T>({
               key={id}
               onClick={() => onRowClick?.(row)}
               className={cn(
-                "flex flex-col gap-3 rounded-xl border border-border/80 bg-card p-4 shadow-card transition-colors",
+                "flex h-full flex-col gap-3 rounded-xl border border-border/80 bg-card p-4 shadow-card transition-colors",
                 onRowClick && "cursor-pointer hover:border-primary/40 hover:bg-muted/30",
               )}
             >
@@ -900,7 +905,7 @@ export function DataTable<T>({
               </dl>
               {actions ? (
                 <div
-                  className="flex flex-wrap items-center justify-end gap-1.5 border-t border-border/60 pt-3"
+                  className="mt-auto flex flex-wrap items-center justify-end gap-1.5 border-t border-border/60 pt-3"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {actions.render ? actions.render(row) : null}
@@ -1003,7 +1008,7 @@ export function DataTable<T>({
               }}
             />
           ) : null}
-          {dateKey ? (
+          {effectiveDateKey ? (
             <DateFilter
               value={dateValue}
               onChange={(v) => {
