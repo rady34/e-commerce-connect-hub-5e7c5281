@@ -78,21 +78,21 @@ function SidebarNav({
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? null : item.label)}
-                  className="rounded-md p-1.5 text-sidebar-foreground/60 hover:bg-sidebar-accent"
+                  className="rounded-md p-1 text-sidebar-foreground/60 hover:bg-sidebar-accent"
                   aria-label="فتح القائمة الفرعية"
                 >
-                  <ChevronDown className={cn("size-4 transition-transform", isOpen && "rotate-180")} />
+                  <ChevronDown className={cn("size-3.5 transition-transform", isOpen && "rotate-180")} />
                 </button>
               ) : null}
             </div>
             {!collapsed && item.children && isOpen ? (
-              <div className="my-1 space-y-1 border-e-2 border-sidebar-border pe-3 me-4">
+              <div className="my-1 space-y-0.5 border-e-2 border-sidebar-border pe-2 me-3">
                 {item.children.map((c) => (
                   <AnyLink
                     key={c.label}
                     to={c.to}
                     onClick={onNavigate}
-                    className="block rounded-md px-3 py-2 text-[13px] text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                    className="block truncate rounded-md px-2 py-1.5 text-[12px] text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                   >
                     {c.label}
                   </AnyLink>
