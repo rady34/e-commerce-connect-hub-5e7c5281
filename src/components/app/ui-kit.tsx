@@ -761,8 +761,11 @@ export function DataTable<T>({
   const [selected, setSelected] = React.useState<Set<string>>(new Set());
 
   const effectiveDateKey = React.useMemo(
-    () => dateKey ?? (columns.find((c) => c.type === "date")?.key as keyof T | undefined),
-    [dateKey, columns],
+    () =>
+      dateKey ??
+      (columns.find((c) => (c.type ?? inferType(data.map((r) => (r as Record<string, unknown>)[c.key]))) === "date")
+        ?.key as keyof T | undefined),
+    [dateKey, columns, data],
   );
 
   const rowId = React.useCallback((row: T, i: number) => getRowId?.(row, i) ?? String(i), [getRowId]);
@@ -810,10 +813,10 @@ export function DataTable<T>({
       if (needsValue && rule.value === "") continue;
       rows = rows.filter((r) => matchRule((r as Record<string, unknown>)[rule.field], rule, fieldType(rule.field)));
     }
-    if (dateKey && dateValue.preset !== "all") {
+    if (effectiveDateKey && dateValue.preset !== "all") {
       const { from, to } = resolveDateRange(dateValue);
       rows = rows.filter((r) => {
-        const t = new Date(String(r[dateKey] ?? "")).getTime();
+        const t = new Date(String(r[effectiveDateKey] ?? "")).getTime();
         if (!Number.isFinite(t)) return false;
         if (from && t < from.getTime()) return false;
         if (to && t > to.getTime()) return false;
@@ -823,7 +826,7 @@ export function DataTable<T>({
     const s = sortOptions.find((o) => o.value === sort);
     if (s) rows = [...rows].sort(s.compare);
     return rows;
-  }, [searched, filters, legacy, rules, fieldType, dateKey, dateValue, sort, sortOptions]);
+  }, [searched, filters, legacy, rules, fieldType, effectiveDateKey, dateValue, sort, sortOptions]);
 
   const pages = Math.max(1, Math.ceil(filtered.length / pageSize));
   const current = Math.min(page, pages);
