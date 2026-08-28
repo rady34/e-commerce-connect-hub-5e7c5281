@@ -327,12 +327,12 @@ export function AppShell({ role, children }: { role: AppRole; children: React.Re
   );
 
   return (
-    <div className="flex min-h-screen bg-muted/40">
-      {/* Desktop sidebar */}
+    <div className="flex min-h-screen bg-muted/40" dir="rtl">
+      {/* Desktop sidebar (RTL: يفتح من جهة اليمين) */}
       <aside
         className={cn(
           "sticky top-0 hidden h-screen shrink-0 border-e border-sidebar-border transition-all duration-200 lg:block",
-          collapsed ? "w-[64px]" : "w-[15rem]",
+          collapsed ? "w-[60px]" : "w-[12.5rem]",
         )}
       >
         {sidebar}
@@ -342,9 +342,10 @@ export function AppShell({ role, children }: { role: AppRole; children: React.Re
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-overlay" onClick={() => setMobileOpen(false)} />
-          <div className="absolute inset-y-0 start-0 w-64 shadow-xl">{sidebar}</div>
+          <div className="absolute inset-y-0 start-0 w-[13.5rem] shadow-xl">{sidebar}</div>
         </div>
       )}
+
 
       <div className="flex min-w-0 flex-1 flex-col">
         <PreviewBanner />
